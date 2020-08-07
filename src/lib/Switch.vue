@@ -1,17 +1,20 @@
 <template>
-  <button @click="toggle" :class="{checked}">
+  <button @click="toggle" :class="{checked:value}">
     <span></span>
   </button>
 </template>
 <script lang="ts">
 import { ref } from 'vue'
 export default {
-  setup() {
-    const checked = ref(false)
+  props: {
+    value: Boolean,
+  },
+  setup(props, context) {
     const toggle = () => {
-      checked.value = !checked.value
+      // 把当前的值取反
+      context.emit('input',!props.value) // this.$emit()
     }
-    return { checked, toggle }
+    return { toggle }
   },
 }
 </script>
@@ -42,7 +45,7 @@ button.checked {
 button.checked > span {
   left: calc(100% - #{$h2} - 2px);
 }
-button:focus{
-  outline:none;
+button:focus {
+  outline: none;
 }
 </style>
