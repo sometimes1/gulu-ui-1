@@ -1,8 +1,8 @@
 <template>
   <div>
-    <Switch :value="y" @updeta:value="y=$event" />
+    <Switch :value="bool" @updeta:value="bool=$event" />
     <!--  等同于
-      <Switch v-model:value="y" />
+      <Switch v-model:value="bool" />
        -->
   </div>
 </template>
@@ -12,8 +12,8 @@ import { ref } from 'vue'
 export default {
   components: { Switch },
   setup() {
-    const y = ref(false)
-    return { y }
+    const bool = ref(false)
+    return { bool }
   },
 }
 </script>
