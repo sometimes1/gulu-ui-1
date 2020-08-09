@@ -1,22 +1,20 @@
 <template>
-  <button v-bind="$attrs">
+  <button class="gulu-button"
+   :class="{[`theme-${theme}`]:theme}">
+   <!--如果theme是undefind就把这个class关掉
+   如果theme不是undefind那么这个class就存在-->
     <slot />
   </button>
 </template>
 <script lang="ts">
 export default {
-  inheritAttrs: false, // 继承属性改为false
-  props: {},
-  setup(props, context) {
-    // es6语法括展操作符
-    // size取出来，其他的都放在rest
-    const { size, ...rest } = context.attrs
-    return { size, rest }
+  props: {
+    theme: {
+      type: String,
+      default:'button'
+    },
   },
 }
 </script>
 <style lang="scss" scoped>
-div {
-  border: 1px solid red;
-}
 </style>
