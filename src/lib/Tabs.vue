@@ -10,7 +10,13 @@
   </div>
 </template>
 <script lang="ts">
-import { computed, HtmlHTMLAttributes, onMounted, onUpdated, ref } from 'vue'
+import {
+  computed,
+  HtmlHTMLAttributes,
+  onMounted,
+  ref,
+  watchEffect
+} from 'vue'
 import Tab from './Tab.vue'
 export default {
   props: {
@@ -21,17 +27,19 @@ export default {
     const selectedItem = ref<HTMLDivElement>(null)
     const indicator = ref<HTMLDivElement>(null)
     const container = ref<HTMLDivElement>(null)
-    const x = () => {
-      const { width } = selectedItem.value.getBoundingClientRect()
-      indicator.value.style.width = width + 'px'
-      const { left: left1 } = container.value.getBoundingClientRect()
-      const { left: left2 } = selectedItem.value.getBoundingClientRect()
-      const left = left2 - left1
-      indicator.value.style.left = left + 'px'
-    }
-    // onMounted只在第一次渲染执行
-    onMounted(x)
-    onUpdated(x)
+    onMounted(() => {
+      // watchEffect() 会在挂载之前就执行所以在挂载之后再watchEffect
+      watchEffect(() => {
+        //获取宽高的位置 还有height top
+        const { width } = selectedItem.value.getBoundingClientRect()
+        indicator.value.style.width = width + 'px'
+        //析构赋值的重命名语法 然后相减
+        const { left: left1 } = container.value.getBoundingClientRect()
+        const { left: left2 } = selectedItem.value.getBoundingClientRect()
+        const left = left2 - left1
+        indicator.value.style.left = left + 'px'
+      })
+    })
     const defaults = context.slots.default()
     // console.log(defaults[0].type === Tab)
     defaults.forEach((tag) => {
