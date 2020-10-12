@@ -1,35 +1,41 @@
 <template>
-  <div class="gulu-dialog-overlay"></div>
-  <div class="gulu-dialog-wrapper">
-    <div class="gulu-dialog">
-      <header>标题
-        <span class="gulu-dialog-close"></span>
-      </header>
-      <main>
-        <p>第一行字</p>
-        <p>第二行字</p>
-      </main>
-      <footer>
-        <Button level="main">Ok</Button>
-        <Button>Cancel</Button>
-      </footer>
+  <template v-if="visible">
+    <div class="gulu-dialog-overlay"></div>
+    <div class="gulu-dialog-wrapper">
+      <div class="gulu-dialog">
+        <header>标题
+          <span class="gulu-dialog-close"></span>
+        </header>
+        <main>
+          <p>第一行字</p>
+          <p>第二行字</p>
+        </main>
+        <footer>
+          <Button level="main">Ok</Button>
+          <Button>Cancel</Button>
+        </footer>
+      </div>
     </div>
-
-  </div>
+  </template>
 </template>
 
 <script lang="ts">
-import Button from "./Button.vue";
+import Button from './Button.vue'
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
 
 export default {
-  props: {},
+  props: {
+    visible: {
+      type: Boolean,
+      default: false,
+    },
+  },
   //import引入的组件需要注入到对象中才能使用
   components: { Button },
   data() {
     //这里存放数据
-    return {};
+    return {}
   },
   //监听属性 类似于data概念
   computed: {},
@@ -48,7 +54,7 @@ export default {
   beforeDestroy() {}, //生命周期 - 销毁之前
   destroyed() {}, //生命周期 - 销毁完成
   activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
-};
+}
 </script>
 <style lang='scss'>
 $radius: 4px;
@@ -99,7 +105,7 @@ $border-color: #d9d9d9;
     cursor: pointer;
     &::before,
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       height: 1px;
       background: black;
