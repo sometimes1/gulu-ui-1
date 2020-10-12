@@ -1,7 +1,8 @@
 <template>
   <div class="gulu-tabs">
     <div class="gulu-tabs-nav">
-      <div class="gulu-tabs-nav-item" @click="select(t)" :class="{selected: t === selected}" v-for="(t,index) in titles" :key="index">{{t}}</div>
+      <div class="gulu-tabs-nav-item" @click="select(t)" :class="{selected: t === selected}" v-for="(t,index) in titles" :ref="el=>{if (el) navItems[index] = el}" :key="index">{{t}}</div>
+      <div class="gulu-tabs-nav-indicator" ref="indicator"></div>
     </div>
     <div class="gulu-tabs-content">
       <component class="gulu-tabs-content-item" :is="current" :key="current.props.title" />
@@ -9,7 +10,7 @@
   </div>
 </template>
 <script lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import Tab from './Tab.vue'
 export default {
   props: {
@@ -23,6 +24,15 @@ export default {
         throw new Error('Tabs 子标签必须是 Tab')
       }
     })
+    const navItems = ref<HTMLDivElement[]>([])
+    const indicator = ref<HTMLDivElement>(null)
+    onMounted(() => {
+      const divs = navItems.value
+      const result = divs.filter((div) => div.classList.contains('selected'))[0]
+      // console.log(result)
+      const { width } = result.getBoundingClientRect()
+      indicator.value.style.width = width + 'px'
+    })
     const current = computed(() => {
       return defaults.find((tag) => tag.props.title === props.selected)
     })
@@ -32,7 +42,7 @@ export default {
     const select = (title: string) => {
       context.emit('update:selected', title)
     }
-    return { defaults, titles, current, select }
+    return { defaults, titles, current, select, navItems, indicator }
   }
 }
 </script>
@@ -45,6 +55,7 @@ $border-color: #d9d9d9;
     display: flex;
     color: $color;
     border-bottom: 1px solid $border-color;
+    position: relative;
     &-item {
       padding: 8px 0;
       margin: 0 16px;
@@ -55,6 +66,14 @@ $border-color: #d9d9d9;
       &.selected {
         color: $blue;
       }
+    }
+    &-indicator {
+      position: absolute;
+      height: 3px;
+      background: $blue;
+      left: 0;
+      bottom: -1px;
+      width: 100px;
     }
   }
   &-content {
