@@ -1,18 +1,27 @@
 <template>
   <template v-if="visible">
-    <div class="gulu-dialog-overlay"></div>
+    <div
+      class="gulu-dialog-overlay"
+      @click="close"
+    ></div>
     <div class="gulu-dialog-wrapper">
       <div class="gulu-dialog">
         <header>标题
-          <span class="gulu-dialog-close"></span>
+          <span
+            @click="close"
+            class="gulu-dialog-close"
+          ></span>
         </header>
         <main>
           <p>第一行字</p>
           <p>第二行字</p>
         </main>
         <footer>
-          <Button level="main">Ok</Button>
-          <Button>Cancel</Button>
+          <Button
+            level="main"
+            @click="ok"
+          >Ok</Button>
+          <Button @click="cancel">Cancel</Button>
         </footer>
       </div>
     </div>
@@ -30,9 +39,43 @@ export default {
       type: Boolean,
       default: false,
     },
+    closeOnClickOverlay: {
+      type: Boolean,
+      default: true,
+    },
+    ok: {
+      type: Function,
+    },
+    cancel: {
+      type: Function,
+    },
   },
   //import引入的组件需要注入到对象中才能使用
   components: { Button },
+  setup(props, context) {
+    const close = () => {
+      context.emit('update:visible', false)
+    }
+    const OnClickOverlay = () => {
+      if (props.closeOnClickOverlay) {
+        console.log('closeOnClickOverlay')
+        close()
+      }
+    }
+    const ok = () => {
+      // if (props.ok && props.ok() !== false) {
+      if (props.ok?.() !== false) {
+        close()
+      }
+      context.emit('ok')
+    }
+    const cancel = () => {
+      context.emit('cancel')
+      close()
+    }
+
+    return { close, OnClickOverlay, ok, cancel }
+  },
   data() {
     //这里存放数据
     return {}
