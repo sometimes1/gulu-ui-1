@@ -69,7 +69,9 @@ export default {
   }
 }
 aside {
-  background: lightblue;
+  background: linear-gradient(180deg, rgba(49,49,49,1) 0%,
+   rgba(47,47,47,1) 100%);
+   color:white;
   width: 150px;
   padding: 16px;
   position: fixed;
