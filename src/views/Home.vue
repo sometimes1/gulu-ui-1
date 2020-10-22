@@ -43,6 +43,9 @@ $blue: #000046;
     rgba(108, 105, 105, 0.7850534539473684) 0%,
     rgba(48, 48, 48, 1) 100%
   );
+  // border-bottom-left-radius:50% 80px;
+  // border-bottom-right-radius:50% 80px;
+  clip-path: ellipse(80% 60% at 50% 40%);
 }
 .features {
   > svg {
