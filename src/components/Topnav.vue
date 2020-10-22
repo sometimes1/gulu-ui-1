@@ -1,6 +1,10 @@
 <template>
   <div class="topnav">
-    <div class="logo">LOGO</div>
+    <div class="logo">
+      <svg class="icon">
+        <use xlink:href="#icon-uikit" />
+      </svg>
+    </div>
     <ul class="menu">
       <li>菜单1</li>
       <li>菜单2</li>
@@ -17,7 +21,7 @@ export default {
       menuVisible.value = !menuVisible.value
     }
     return { toggleMenu }
-  },
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -34,6 +38,10 @@ export default {
   > .logo {
     max-width: 6em;
     margin-right: auto;
+    > svg {
+      width: 32px;
+      height: 32px;
+    }
   }
   > .menu {
     display: flex;
