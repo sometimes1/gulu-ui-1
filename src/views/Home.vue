@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="topnavAndBanner">
     <Topnav />
     <div class="banner">
       <h1>轱辘UI</h1>
@@ -15,18 +15,25 @@
 import Topnav from '../components/Topnav.vue'
 export default {
   components: {
-    Topnav,
-  },
+    Topnav
+  }
 }
 </script>
 <style lang="scss" scoped>
+.topnavAndBanner {
+  background: rgb(108, 105, 105);
+  background: linear-gradient(
+    142deg,
+    rgba(108, 105, 105, 0.7850534539473684) 0%,
+    rgba(48, 48, 48, 1) 100%
+  );
+}
 .banner {
   padding: 100px 0;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: lightgreen;
   > .actions {
     padding: 8px 0;
     a {
