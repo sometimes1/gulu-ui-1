@@ -1,3 +1,4 @@
+<demo>支持 disabled </demo>
 <template>
   <!-- <Switch v-model:value="bool" disabled /> -->
   <Switch :value="bool" @updeta:value="bool=$event" disabled />
