@@ -89,7 +89,7 @@ aside {
   );
   color: white;
   width: 150px;
-  padding: 16px;
+  padding: 16px 0;
   position: fixed;
   top: 0;
   left: 0;
@@ -97,11 +97,20 @@ aside {
   height: 100%;
   z-index: 1;
   > h2 {
-    margin-bottom: 4px;
+    margin: 10px 0;
+    padding: 0 16px;
   }
   > ol {
     > li {
-      padding: 4px 0;
+      > a {
+        padding: 4px 16px;
+        display: block;
+        font-weight: bold;
+      }
+      .router-link-active {
+        background: white;
+        color: #313131;
+      }
     }
   }
   main {
