@@ -4,6 +4,19 @@
       <Topnav toggleMenuButtonVisible class="nav" />
       <div class="content">
         <aside v-if="menuVisible">
+          <h2>文档</h2>
+          <ol>
+            <li>
+              <router-link to="/doc/intro">介绍</router-link>
+            </li>
+            <li>
+              <router-link to="/doc/install">安装</router-link>
+            </li>
+            <li>
+              <router-link to="/doc/get-started">开始使用</router-link>
+            </li>
+
+          </ol>
           <h2>组件列表</h2>
           <ol>
             <li>
@@ -69,9 +82,12 @@ export default {
   }
 }
 aside {
-  background: linear-gradient(180deg, rgba(49,49,49,1) 0%,
-   rgba(47,47,47,1) 100%);
-   color:white;
+  background: linear-gradient(
+    180deg,
+    rgba(49, 49, 49, 1) 0%,
+    rgba(47, 47, 47, 1) 100%
+  );
+  color: white;
   width: 150px;
   padding: 16px;
   position: fixed;
