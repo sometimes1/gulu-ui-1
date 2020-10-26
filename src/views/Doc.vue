@@ -4,34 +4,36 @@
       <Topnav toggleMenuButtonVisible class="nav" />
       <div class="content">
         <aside v-if="menuVisible">
-          <h2>文档</h2>
-          <ol>
-            <li>
-              <router-link to="/doc/intro">介绍</router-link>
-            </li>
-            <li>
-              <router-link to="/doc/install">安装</router-link>
-            </li>
-            <li>
-              <router-link to="/doc/get-started">开始使用</router-link>
-            </li>
-
-          </ol>
-          <h2>组件列表</h2>
-          <ol>
-            <li>
-              <router-link to="/doc/Switch">Switch 组件</router-link>
-            </li>
-            <li>
-              <router-link to="/doc/button">Button 组件</router-link>
-            </li>
-            <li>
-              <router-link to="/doc/dialog">Dialog 组件</router-link>
-            </li>
-            <li>
-              <router-link to="/doc/tabs">Tabs 组件</router-link>
-            </li>
-          </ol>
+          <div class="left">
+            <h2>文档</h2>
+            <ol>
+              <li>
+                <router-link to="/doc/intro">介绍</router-link>
+              </li>
+              <li>
+                <router-link to="/doc/install">安装</router-link>
+              </li>
+              <li>
+                <router-link to="/doc/get-started">开始使用</router-link>
+              </li>
+            </ol>
+            <h2>组件列表</h2>
+            <ol>
+              <li>
+                <router-link to="/doc/Switch">Switch 组件</router-link>
+              </li>
+              <li>
+                <router-link to="/doc/button">Button 组件</router-link>
+              </li>
+              <li>
+                <router-link to="/doc/dialog">Dialog 组件</router-link>
+              </li>
+              <li>
+                <router-link to="/doc/tabs">Tabs 组件</router-link>
+              </li>
+            </ol>
+          </div>
+          <div class="right" @click="toggleCode"></div>
         </aside>
         <main>
           <router-view />
@@ -49,7 +51,8 @@ export default {
   },
   setup() {
     const menuVisible = inject<Ref<boolean>>('menuVisible') //get
-    return { menuVisible }
+    const toggleCode = () => (menuVisible.value = !menuVisible.value)
+    return { menuVisible, toggleCode }
   }
 }
 </script>
@@ -82,34 +85,44 @@ export default {
   }
 }
 aside {
-  background: linear-gradient(
-    180deg,
-    rgba(49, 49, 49, 1) 0%,
-    rgba(47, 47, 47, 1) 100%
-  );
+  width: 100%;
   color: white;
-  width: 150px;
-  padding: 16px 0;
   position: fixed;
   top: 0;
   left: 0;
-  padding-top: 70px;
   height: 100%;
   z-index: 1;
-  > h2 {
-    margin: 10px 0;
-    padding: 0 16px;
+  display: flex;
+  > .right {
+    @media (max-width: 500px) {
+      width: 100%;
+      background-color: transparent;
+    }
   }
-  > ol {
-    > li {
-      > a {
-        padding: 4px 16px;
-        display: block;
-        font-weight: bold;
-      }
-      .router-link-active {
-        background: white;
-        color: #313131;
+  > .left {
+    padding: 70px 0 16px;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(49, 49, 49, 1) 0%,
+      rgba(47, 47, 47, 1) 100%
+    );
+    min-width: 150px;
+    > h2 {
+      margin: 10px 0;
+      padding: 0 16px;
+    }
+    > ol {
+      > li {
+        > a {
+          padding: 4px 16px;
+          display: block;
+          font-weight: bold;
+        }
+        .router-link-active {
+          background: white;
+          color: #313131;
+        }
       }
     }
   }
