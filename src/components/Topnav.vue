@@ -34,18 +34,19 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-$yellow: #ffca39;
+$color: #ffca39;
 .topnav {
-  color: $yellow;
+  color: $color;
   display: flex;
   padding: 16px;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 10;
+  z-index: 20;
   justify-content: center;
   align-items: center;
+  background: rgba(47, 47, 47, 1);
   > .logo {
     max-width: 6em;
     margin-right: auto;

@@ -13,7 +13,7 @@
               <li>
                 <router-link to="/doc/install">安装</router-link>
               </li>
-              <li>
+              <li class="xxx">
                 <router-link to="/doc/get-started">开始使用</router-link>
               </li>
             </ol>
@@ -85,28 +85,25 @@ export default {
   }
 }
 aside {
-  width: 100%;
   color: white;
   position: fixed;
   top: 0;
   left: 0;
   height: 100%;
-  z-index: 1;
+  z-index: 10;
   display: flex;
-  > .right {
-    @media (max-width: 500px) {
+  @media (max-width: 500px) {
+    width: 100%;
+    > .right {
       width: 100%;
       background-color: transparent;
     }
   }
+
   > .left {
     padding: 70px 0 16px;
     height: 100%;
-    background: linear-gradient(
-      180deg,
-      rgba(49, 49, 49, 1) 0%,
-      rgba(47, 47, 47, 1) 100%
-    );
+    background: rgba(47, 47, 47, 1);
     min-width: 150px;
     > h2 {
       margin: 10px 0;
